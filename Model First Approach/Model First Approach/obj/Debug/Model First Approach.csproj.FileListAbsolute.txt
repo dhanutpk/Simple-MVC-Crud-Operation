@@ -1,0 +1,10 @@
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\Model First Approach.exe.config
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\Model First Approach.exe
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\Model First Approach.pdb
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\EntityFramework.dll
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\EntityFramework.SqlServer.dll
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\EntityFramework.xml
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\bin\Debug\EntityFramework.SqlServer.xml
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\obj\Debug\Model First Approach.exe
+D:\Users\djogihal\Documents\Visual Studio 2012\Projects\Model First Approach\Model First Approach\obj\Debug\Model First Approach.pdb
+d:\users\djogihal\documents\visual studio 2012\Projects\Model First Approach\Model First Approach\obj\Debug\Model First Approach.csprojResolveAssemblyReference.cache

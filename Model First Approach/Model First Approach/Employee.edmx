@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Employee.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeStoreContainer">
+    <EntitySet Name="Employees" EntityType="Employee.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departments" EntityType="Employee.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeAddresses" EntityType="Employee.Store.EmployeeAddresses" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EmployeeDepartment" Association="Employee.Store.EmployeeDepartment">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="Address" Association="Employee.Store.Address">
+      <End Role="EmployeeAddress" EntitySet="EmployeeAddresses" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="DOB" Type="datetime" Nullable="true" />
+    <Property Name="DOJ" Type="datetime" Nullable="true" />
+    <Property Name="EmailId" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="DeptId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EmployeeAddresses">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="AddressLine2" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <Association Name="EmployeeDepartment">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="*" />
+    <End Role="Department" Type="Employee.Store.Departments" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Address">
+    <End Role="EmployeeAddress" Type="Employee.Store.EmployeeAddresses" Multiplicity="0..1" />
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeAddress">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Employee" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EmployeeContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Employee.Employee" />
+          <EntitySet Name="Departments" EntityType="Employee.Department" />
+          <AssociationSet Name="EmployeeDepartment" Association="Employee.EmployeeDepartment">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeAddresses" EntityType="Employee.EmployeeAddress" />
+          <AssociationSet Name="Address" Association="Employee.Address">
+            <End Role="EmployeeAddress" EntitySet="EmployeeAddresses" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Type="Int32" Name="EmployeeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="DOB" Precision="5" Nullable="true" />
+          <Property Type="DateTime" Name="DOJ" Nullable="true" />
+          <Property Type="String" Name="EmailId" MaxLength="200" Nullable="true" />
+          <NavigationProperty Name="Department" Relationship="Employee.EmployeeDepartment" FromRole="Employee" ToRole="Department" />
+          <Property Type="Int32" Name="DeptId" Nullable="false" />
+          <NavigationProperty Name="EmployeeAddress" Relationship="Employee.Address" FromRole="Employee" ToRole="EmployeeAddress" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Type="Int32" Name="DeptId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" />
+          <NavigationProperty Name="Employees" Relationship="Employee.EmployeeDepartment" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <Association Name="EmployeeDepartment">
+          <End Type="Employee.Employee" Role="Employee" Multiplicity="*" />
+          <End Type="Employee.Department" Role="Department" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeAddress">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Type="Int32" Name="EmployeeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AddressLine1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AddressLine2" Nullable="true" MaxLength="250" />
+          <NavigationProperty Name="Employee" Relationship="Employee.Address" FromRole="EmployeeAddress" ToRole="Employee" />
+        </EntityType>
+        <Association Name="Address">
+          <End Type="Employee.EmployeeAddress" Role="EmployeeAddress" Multiplicity="1" />
+          <End Type="Employee.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeAddress">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeStoreContainer" CdmEntityContainer="EmployeeContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.Department)">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeAddresses">
+      <EntityTypeMapping TypeName="IsTypeOf(Employee.EmployeeAddress)">
+        <MappingFragment StoreEntitySet="EmployeeAddresses">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

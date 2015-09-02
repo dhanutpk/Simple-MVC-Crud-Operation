@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EmployeeEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="EmployeeModel.Department" />
+    <EntitySet Name="Employees" EntityType="EmployeeModel.Employee" />
+    <AssociationSet Name="FK_EmployeeDepartment" Association="EmployeeModel.FK_EmployeeDepartment">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Employees" Relationship="EmployeeModel.FK_EmployeeDepartment" FromRole="Departments" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="DOJ" Type="DateTime" Precision="3" />
+    <Property Name="EmailId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="EmployeeModel.FK_EmployeeDepartment" FromRole="Employees" ToRole="Departments" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" />
+  </EntityType>
+  <Association Name="FK_EmployeeDepartment">
+    <End Role="Departments" Type="EmployeeModel.Department" Multiplicity="1" />
+    <End Role="Employees" Type="EmployeeModel.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

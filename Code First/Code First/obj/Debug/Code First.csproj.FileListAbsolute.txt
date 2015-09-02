@@ -1,0 +1,10 @@
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\Code First.exe.config
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\Code First.exe
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\Code First.pdb
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\EntityFramework.dll
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\EntityFramework.SqlServer.dll
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\EntityFramework.xml
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\bin\Debug\EntityFramework.SqlServer.xml
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\obj\Debug\Code First.exe
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\obj\Debug\Code First.pdb
+d:\users\djogihal\documents\visual studio 2012\Projects\Code First\Code First\obj\Debug\Code First.csprojResolveAssemblyReference.cache

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Employee.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EmployeeStoreContainer">
+    <EntitySet Name="Employees" EntityType="Employee.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departments" EntityType="Employee.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeAddresses" EntityType="Employee.Store.EmployeeAddresses" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EmployeeDepartment" Association="Employee.Store.EmployeeDepartment">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="Address" Association="Employee.Store.Address">
+      <End Role="EmployeeAddress" EntitySet="EmployeeAddresses" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="DOB" Type="datetime" Nullable="true" />
+    <Property Name="DOJ" Type="datetime" Nullable="true" />
+    <Property Name="EmailId" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="DeptId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EmployeeAddresses">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="AddressLine2" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <Association Name="EmployeeDepartment">
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="*" />
+    <End Role="Department" Type="Employee.Store.Departments" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Address">
+    <End Role="EmployeeAddress" Type="Employee.Store.EmployeeAddresses" Multiplicity="0..1" />
+    <End Role="Employee" Type="Employee.Store.Employees" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeAddress">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
